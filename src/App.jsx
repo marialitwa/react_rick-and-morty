@@ -1,7 +1,8 @@
 import './App.css';
+
 import styled from 'styled-components';
-import Card from './components/Card.jsx';
 import Header from './components/Header.jsx';
+import Card from './components/Card.jsx';
 
 function App() {
 
@@ -16,7 +17,6 @@ function App() {
 }
 
 export default App
-
 
 
 const Main = styled.div`
