@@ -1,11 +1,41 @@
 /* eslint-disable react/prop-types */
 // import React from 'react'
-import data from '../data.js';
+import { useEffect, useState } from 'react';
 import styled from "styled-components";
 
-const characters = data.results;
+const apiUrl = "https://rickandmortyapi.com/api/character/"
+
 
 function Card() {
+
+    const [characters, setCharacters] = useState([]);
+
+    async function fetchData() {
+
+        try {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+
+            console.log(data)
+
+            if (response.ok) {
+                setCharacters(data.results)
+            } else {
+                console.error("Bad response")
+            }
+            
+        } catch (error) {
+
+            console.error("An error occured", error);
+            
+        }
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+
 
     return (
         <>
@@ -70,7 +100,6 @@ const FlipCardFront = styled.div `
     background-color: #bbb;
     color: black;
 `;
-
 // backface-visibility: hidden/visible => An element's back face is a mirror image of its front face
 
 
