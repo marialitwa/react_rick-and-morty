@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
 // import React from 'react'
-// import data from '../data.js';
 import { useEffect, useState } from 'react';
 import styled from "styled-components";
 
-// const characters = data.results;
 const apiUrl = "https://rickandmortyapi.com/api/character/"
 
 
@@ -102,7 +100,6 @@ const FlipCardFront = styled.div `
     background-color: #bbb;
     color: black;
 `;
-
 // backface-visibility: hidden/visible => An element's back face is a mirror image of its front face
 
 
