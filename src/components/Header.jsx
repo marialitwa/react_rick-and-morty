@@ -1,7 +1,7 @@
 function Header() {
   return (
     <>
-        <nav>Inside the header comes the navbar</nav>
+        <nav>Navbar</nav>
     </>
   )
 }

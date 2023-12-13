@@ -2,13 +2,16 @@
 // import React from 'react'
 import { useEffect, useState } from 'react';
 import styled from "styled-components";
+import CardModal from './CardModal';
 
 const apiUrl = "https://rickandmortyapi.com/api/character/"
 
 
-function Card() {
+export default function Card() {
 
     const [characters, setCharacters] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedCharacter, setSelectedCharacter] = useState(null);
 
     async function fetchData() {
 
@@ -16,7 +19,7 @@ function Card() {
             const response = await fetch(apiUrl);
             const data = await response.json();
 
-            console.log(data)
+            console.log(data.results)
 
             if (response.ok) {
                 setCharacters(data.results)
@@ -26,8 +29,7 @@ function Card() {
             
         } catch (error) {
 
-            console.error("An error occured", error);
-            
+            console.error("An error occured", error);     
         }
     }
 
@@ -38,7 +40,8 @@ function Card() {
 
 
     return (
-        <>
+        <Main>
+
             {characters.map((character) => (
 
                 <FlipCardWrapper key={character.id}>
@@ -48,18 +51,58 @@ function Card() {
                         </FlipCardFront>
                         <FlipCardBack>
                             <h2>{character.name}</h2>
-                            <p>Some more text</p>
-                            <button>Learn more</button>
+                            <p>{`Species: ${character.species}`}</p>
+                            <p>{`Origin: ${character.origin.name}`}</p>
+                            <button onClick={() => {
+                                setShowModal(true);
+                                setSelectedCharacter(character);
+
+                                // console.log("Button clicked!")
+                            }}>Learn more</button>
+                            
                         </FlipCardBack>
                     </FlipCardInner>   
                 </FlipCardWrapper>
-            ))}
-        </>
+                 ))}
 
+               
+                    {showModal && ( 
+
+                <ModalWrapper>
+                        <CardModal 
+                            // text={"Modal Text"}
+                            characterName={selectedCharacter && selectedCharacter.name}
+                            characterStatus={selectedCharacter && selectedCharacter.status}
+                            showModal={showModal}
+                            setShowModal={setShowModal}
+                            />
+               </ModalWrapper>
+                    )}  
+        </Main>
     );
 }
 
-export default Card;
+
+const Main = styled.div`  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row wrap;
+
+`;
+
+const ModalWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    background-color: rgba(0,0,0,.7);
+`;
 
 
 // Flip Card Container: 
@@ -105,14 +148,21 @@ const FlipCardFront = styled.div `
 
 // Position & style back side
 const FlipCardBack = styled.div `
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     width: 100%;
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    background-color: #6d6875;
-    color: whitesmoke;
+    background-color: #CABDC3;
+    color: #1b2a41;
     transform: rotateY(180deg);
 `;
+
+
+
 
 
