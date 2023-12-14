@@ -112,6 +112,7 @@ const FlipCardWrapper = styled.div `
     height: 300px;
     perspective: 1000px;
     margin: 2em;
+    _border: 3px solid red;
 `;
 
 
@@ -126,6 +127,7 @@ const FlipCardInner = styled.div `
     transform-style: preserve-3d;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     _border: 1px solid #bbb;
+
 
     &:hover {
         transform: rotateY(180deg);  
@@ -142,6 +144,8 @@ const FlipCardFront = styled.div `
     backface-visibility: hidden;
     background-color: #bbb;
     color: black;
+    _border: 3px solid yellow;
+
 `;
 // backface-visibility: hidden/visible => An element's back face is a mirror image of its front face
 
@@ -160,6 +164,7 @@ const FlipCardBack = styled.div `
     background-color: #CABDC3;
     color: #1b2a41;
     transform: rotateY(180deg);
+
 `;
 
 

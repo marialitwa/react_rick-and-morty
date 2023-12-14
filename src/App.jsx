@@ -1,14 +1,14 @@
 import './App.css';
 
 import styled from 'styled-components';
-import Header from './components/Header.jsx';
 import Card from './components/Card.jsx';
+import SearchBar from './components/SearchBar.jsx';
 
-function App() {
+export default function App() {
 
   return (
     <>
-      <Header />
+      <SearchBar />
       <Main>
         <Card />
       </Main>
@@ -16,8 +16,9 @@ function App() {
   )
 }
 
-export default App
 
+
+// STYLING
 
 const Main = styled.div`
   display: flex;
