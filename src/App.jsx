@@ -6,7 +6,6 @@ import SearchBar from './components/SearchBar.jsx';
 
 const apiUrl = "https://rickandmortyapi.com/api/character/"
 
-
 export default function App() {
 
   const [query, setQuery] = useState("");
