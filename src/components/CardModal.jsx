@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 // eslint-disable-next-line react/prop-types
-export default function CardModal ({ characterName, characterStatus, setShowModal }) {
+export default function CardModal ({ characterImage, characterName, characterStatus, setShowModal }) {
 
     const handleClose = () => {
         setShowModal(false)
@@ -10,6 +10,7 @@ export default function CardModal ({ characterName, characterStatus, setShowModa
     return  (
 
         <StyledModal>
+            <img src={characterImage} alt={`Picture of ${characterImage}`} />
             <p>{characterName}</p>
             <p>{characterStatus}</p>
             <button onClick={handleClose}>Close</button>

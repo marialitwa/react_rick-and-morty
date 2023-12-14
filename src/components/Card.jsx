@@ -4,45 +4,52 @@ import { useEffect, useState } from 'react';
 import styled from "styled-components";
 import CardModal from './CardModal';
 
-const apiUrl = "https://rickandmortyapi.com/api/character/"
 
-
-export default function Card() {
+export default function Card({ query, apiUrl }) {
 
     const [characters, setCharacters] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedCharacter, setSelectedCharacter] = useState(null);
+    const [filteredCharacters, setFilteredCharacters] = useState([]);
 
-    async function fetchData() {
-
-        try {
-            const response = await fetch(apiUrl);
-            const data = await response.json();
-
-            console.log(data.results)
-
-            if (response.ok) {
-                setCharacters(data.results)
-            } else {
-                console.error("Bad response")
-            }
-            
-        } catch (error) {
-
-            console.error("An error occured", error);     
-        }
-    }
 
     useEffect(() => {
+        async function fetchData() {
+
+          try {
+            const response = await fetch(`${apiUrl}?name=${query}`);
+            const data = await response.json();
+      
+            if (response.ok) {
+              setCharacters(data.results);
+
+            } else {
+              console.error("Bad response");
+            }
+          } catch (error) {
+            console.error("An error occurred", error);
+          }
+        }
+      
         fetchData();
-    }, []);
+      }, [query, apiUrl]);
+      
+
+
+    useEffect(() => {
+        const filtered = characters.filter((character) => {
+            return character.name.toLowerCase().includes(query.toLowerCase());
+        });
+
+        setFilteredCharacters(query ? filtered : characters);
+    }, [query, characters]);
 
 
 
     return (
         <Main>
 
-            {characters.map((character) => (
+            {filteredCharacters.map((character) => (
 
                 <FlipCardWrapper key={character.id}>
                     <FlipCardInner> 
@@ -65,12 +72,12 @@ export default function Card() {
                 </FlipCardWrapper>
                  ))}
 
-               
                     {showModal && ( 
 
                 <ModalWrapper>
                         <CardModal 
                             // text={"Modal Text"}
+                            characterImage={selectedCharacter && selectedCharacter.image}
                             characterName={selectedCharacter && selectedCharacter.name}
                             characterStatus={selectedCharacter && selectedCharacter.status}
                             showModal={showModal}
@@ -83,6 +90,10 @@ export default function Card() {
 }
 
 
+
+
+// STYLING
+
 const Main = styled.div`  
     display: flex;
     justify-content: center;
@@ -91,20 +102,6 @@ const Main = styled.div`
 
 `;
 
-const ModalWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1;
-    background-color: rgba(0,0,0,.7);
-`;
-
-
 // Flip Card Container: 
 const FlipCardWrapper = styled.div `
     background-color: transparent;
@@ -112,6 +109,7 @@ const FlipCardWrapper = styled.div `
     height: 300px;
     perspective: 1000px;
     margin: 2em;
+    _border: 3px solid red;
 `;
 
 
@@ -126,6 +124,7 @@ const FlipCardInner = styled.div `
     transform-style: preserve-3d;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     _border: 1px solid #bbb;
+
 
     &:hover {
         transform: rotateY(180deg);  
@@ -142,6 +141,8 @@ const FlipCardFront = styled.div `
     backface-visibility: hidden;
     background-color: #bbb;
     color: black;
+    _border: 3px solid yellow;
+
 `;
 // backface-visibility: hidden/visible => An element's back face is a mirror image of its front face
 
@@ -160,6 +161,20 @@ const FlipCardBack = styled.div `
     background-color: #CABDC3;
     color: #1b2a41;
     transform: rotateY(180deg);
+
+`;
+
+const ModalWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    background-color: rgba(0,0,0,.7);
 `;
 
 

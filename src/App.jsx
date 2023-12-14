@@ -1,23 +1,33 @@
+import { useState } from 'react';
 import './App.css';
-
 import styled from 'styled-components';
-import Header from './components/Header.jsx';
 import Card from './components/Card.jsx';
+import SearchBar from './components/SearchBar.jsx';
 
-function App() {
+const apiUrl = "https://rickandmortyapi.com/api/character/"
+
+export default function App() {
+
+  const [query, setQuery] = useState("");
+
+  function handleInputChange(value) {
+   
+    setQuery(value);
+  }
 
   return (
     <>
-      <Header />
+      <SearchBar handleInputChange={handleInputChange}/>
       <Main>
-        <Card />
+        <Card query={query} apiUrl={apiUrl} />
       </Main>
     </>
   )
 }
 
-export default App
 
+
+// STYLING
 
 const Main = styled.div`
   display: flex;
