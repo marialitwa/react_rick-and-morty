@@ -57,15 +57,15 @@ export default function Card({ query, apiUrl }) {
                             <img src={character.image} alt={`Picture of ${character.name}`}  />
                         </FlipCardFront>
                         <FlipCardBack>
-                            <h2>{character.name}</h2>
-                            <p>{`Species: ${character.species}`}</p>
-                            <p>{`Origin: ${character.origin.name}`}</p>
-                            <button onClick={() => {
+                            <StyledTitle>{character.name}</StyledTitle>
+                            {/* <p>{`Species: ${character.species}`}</p>
+                            <p>{`Origin: ${character.origin.name}`}</p> */}
+                            <Button onClick={() => {
                                 setShowModal(true);
                                 setSelectedCharacter(character);
 
                                 // console.log("Button clicked!")
-                            }}>Learn more</button>
+                            }}>Learn more</Button>
                             
                         </FlipCardBack>
                     </FlipCardInner>   
@@ -74,16 +74,15 @@ export default function Card({ query, apiUrl }) {
 
                     {showModal && ( 
 
-                <ModalWrapper>
                         <CardModal 
-                            // text={"Modal Text"}
                             characterImage={selectedCharacter && selectedCharacter.image}
                             characterName={selectedCharacter && selectedCharacter.name}
                             characterStatus={selectedCharacter && selectedCharacter.status}
+                            characterSpecies={selectedCharacter && selectedCharacter.species}
+                            characterOrigin={selectedCharacter && selectedCharacter.origin.name}
                             showModal={showModal}
                             setShowModal={setShowModal}
                             />
-               </ModalWrapper>
                     )}  
         </Main>
     );
@@ -109,7 +108,6 @@ const FlipCardWrapper = styled.div `
     height: 300px;
     perspective: 1000px;
     margin: 2em;
-    _border: 3px solid red;
 `;
 
 
@@ -123,8 +121,8 @@ const FlipCardInner = styled.div `
     transition: transform .8s;
     transform-style: preserve-3d;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: .2em;
     _border: 1px solid #bbb;
-
 
     &:hover {
         transform: rotateY(180deg);  
@@ -140,14 +138,11 @@ const FlipCardFront = styled.div `
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     background-color: #bbb;
-    color: black;
-    _border: 3px solid yellow;
-
 `;
-// backface-visibility: hidden/visible => An element's back face is a mirror image of its front face
 
 
 // Position & style back side
+// backface-visibility: hidden/visible => An element's back face is a mirror image of its front face
 const FlipCardBack = styled.div `
     display: flex;
     flex-direction: column;
@@ -158,23 +153,39 @@ const FlipCardBack = styled.div `
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    background-color: #CABDC3;
-    color: #1b2a41;
+    background-color: var(--color-accent);
+    color: var(--text-color-dark);
     transform: rotateY(180deg);
 
 `;
 
-const ModalWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1;
-    background-color: rgba(0, 0, 0, .2);
+
+const StyledTitle = styled.h1`
+    font-size: 2rem;
+    margin: .7em .5em;    
+`;
+
+
+const Button = styled.button`
+    margin: .2em 0 .4em;
+    background-color: var(--text-color-dark);
+    color: var(--color-accent);
+    cursor: pointer;
+    padding: 1em 1.5em;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: .5em;
+    text-transform: uppercase;
+    transition: 0.4s;
+    box-shadow: var(--box-shadow);
+
+    &:hover {
+
+        transform: scale(1.05);
+        transition: 0.4s;
+
+    }
 `;
 
 
