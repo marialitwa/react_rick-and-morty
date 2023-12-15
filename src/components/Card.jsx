@@ -174,7 +174,7 @@ const ModalWrapper = styled.div`
     width: 100vw;
     height: 100vh;
     z-index: 1;
-    background-color: rgba(0,0,0,.7);
+    background-color: rgba(0, 0, 0, .2);
 `;
 
 
