@@ -16,7 +16,7 @@ export default function SearchBar( { handleInputChange }) {
             id="query"
             name="query"
             onChange={(event) => {setValue(event.target.value)}}
-            placeholder="Search for characters"
+            placeholder="Search  for  characters ..."
             aria-label="Search"     
           />
         </Form>
@@ -25,10 +25,11 @@ export default function SearchBar( { handleInputChange }) {
 }
 
 
+
+
 // STYLING
 const Form = styled.form`
   margin-bottom: 3em;
-
 `;
 
 const Input = styled.input`
@@ -37,12 +38,20 @@ const Input = styled.input`
   background-color: transparent;
   outline: none;
   border: none;
-  border-bottom: .15rem solid black;
+  border-bottom: .15rem solid var(--color-accent);
+  color: var(--color-accent);
+  font-size: 1.8rem;
+  font-weight: 900;
+  padding-left: 5px;
+  letter-spacing: .1rem;
 
   &::placeholder {
     font-size: 1rem;
-    letter-spacing: .04rem;
-    padding-left: .4em;
+    text-transform: uppercase;
+    letter-spacing: .3rem;
+    color: var(--color-accent);
+    opacity: .7;
+    font-weight: 600;
   }
 `;
 
