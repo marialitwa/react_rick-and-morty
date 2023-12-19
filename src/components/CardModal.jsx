@@ -10,7 +10,7 @@ export default function CardModal ({ characterImage, characterName, characterSta
     return  (   
         <ModalWrapper>
             <Modal>
-                <Subtitle>{characterName}</Subtitle>
+                <CharacterName>{characterName}</CharacterName>
                 <Image src={characterImage} alt={`Picture of ${characterImage}`} />
                 <Bodytext>{`Status: ${characterStatus}`}</Bodytext>
                 <Bodytext>{`Species: ${characterSpecies}`}</Bodytext>
@@ -48,19 +48,19 @@ const Modal = styled.div`
     height: 500px;
     border-radius: .2em;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .5);
+    position: relative;
 `;
 
 
-const Subtitle = styled.h2`
+const CharacterName = styled.h2`
     font-size: 1.5rem;
-    margin-top: 1.2em;
-    margin-bottom: .8em;
+    margin-bottom: 1em;
 
 `;
 
 const Image = styled.img`
     height: 250px;
-    margin-bottom: 1.5em;
+    margin-bottom: 2em;
     border-radius: 50%;
     box-shadow: var(--box-shadow);
 `;
@@ -74,11 +74,14 @@ const Button = styled.button`
     margin-bottom: .3em;
     background-color: transparent;
     cursor: pointer;
-    padding: 0.5em 1em;
+    _padding: 0.5em 1em;
     border: none;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: var(--text-color-dark);
-    font-weight: 900;
+    font-weight: 500;
+    position: absolute;
+    top: 18px;
+    right: 20px;
 `;
 
 
