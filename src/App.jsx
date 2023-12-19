@@ -17,6 +17,7 @@ export default function App() {
 
   return (
     <>
+      <Title>Rick & Morty Cards</Title>
       <SearchBar handleInputChange={handleInputChange}/>
       <Main>
         <Card query={query} apiUrl={apiUrl} />
@@ -34,3 +35,15 @@ const Main = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
 `;
+
+const Title = styled.h1`
+  font-size: 3.5em;
+  letter-spacing: 0.1em;
+  margin: 0.2em 0 .8em;
+  color: var(--text-color-dark);
+  text-transform: uppercase;
+  -webkit-text-stroke: 2px var(--color-accent);
+  
+
+`;
+

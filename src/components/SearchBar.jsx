@@ -46,12 +46,13 @@ const Input = styled.input`
   letter-spacing: .1rem;
 
   &::placeholder {
-    font-size: 1rem;
+    font-size: 1.2rem;
     text-transform: uppercase;
     letter-spacing: .3rem;
     color: var(--color-accent);
     opacity: .7;
     font-weight: 600;
+    -webkit-text-stroke: 1px var(--text-color-dark);
   }
 `;
 
