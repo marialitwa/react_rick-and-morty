@@ -1,4 +1,4 @@
-# Rick & Morty App
+# Rick & Morty App built with React
 
 This web app is a mini refresh **React** project using the _Rick & Morty REST-API_ to search for characters & display specific data about each character. Designed with **Styled Components**.
 
